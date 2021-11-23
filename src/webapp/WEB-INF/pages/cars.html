@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+</head>
+<body>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th> Color </th>
+            <th> Hybrid </th>
+            <th> Wheels </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${cars.empty}">
+            <td colspan="3"> Has no Cars </td>
+        </tr>
+        <tr th:each="cars : ${cars}">
+            <td><span th:text="${cars.color}"> Color </span></td>
+            <td><span th:text="${cars.engine}"> Hybrid </span></td>
+            <td><span th:text="${cars.wheels}"> Wheels </span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
