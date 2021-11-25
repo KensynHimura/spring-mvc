@@ -8,6 +8,26 @@ public class Car {
     private boolean engine;
     private int wheels;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Car car = (Car) o;
+
+        if (engine != car.engine) return false;
+        if (wheels != car.wheels) return false;
+        return color != null ? color.equals(car.color) : car.color == null;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = color != null ? color.hashCode() : 0;
+        result = 31 * result + (engine ? 1 : 0);
+        result = 31 * result + wheels;
+        return result;
+    }
+
     public Car() {
     }
 

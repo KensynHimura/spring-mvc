@@ -7,14 +7,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import web.model.Car;
+import web.service.ServiceCarImp;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
-
 @Controller
-public class HelloController {
-	List<Car> cars = new ArrayList<>();
+public class Controllers {
+	ServiceCarImp carImp = new ServiceCarImp();
 
 	@GetMapping(value = "msg")
 	public String printWelcome(ModelMap model) {
@@ -28,21 +28,7 @@ public class HelloController {
 
 	@GetMapping(value = "cars")
 	public String printCars(@RequestParam(value = "count", required = false, defaultValue = "5") int count, ModelMap modelCar) {
-		cars.clear();
-		cars.add(new Car("red", true, 4));
-		cars.add(new Car("white", false, 16));
-		cars.add(new Car("black", false, 4));
-		cars.add(new Car("red", false, 3));
-		cars.add(new Car("green", true, 4));
-		if (count <= 5) {
-			modelCar.addAttribute("cars", getCars(count));
-		} else {
-			modelCar.addAttribute("cars", cars);
-		}
+		modelCar.addAttribute("cars", carImp.getCars(count));
 		return "cars";
-	}
-
-	public List<Car> getCars(int value) {
-		return cars.stream().filter(f -> value > 0 && value <= 5).limit(value).collect(Collectors.toList()) ;
 	}
 }
