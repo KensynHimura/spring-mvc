@@ -1,3 +1,4 @@
+
 package web.config;
 
 import org.springframework.context.ApplicationContext;
@@ -16,14 +17,14 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @ComponentScan("web")
 public class WebConfig implements WebMvcConfigurer {
 
-//  Spring nastroika
+    //  Spring nastroika
     private final ApplicationContext applicationContext;
 
     public WebConfig(ApplicationContext applicationContext) {
         this.applicationContext = applicationContext;
     }
 
-//    Shablon
+    //    Shablon
     @Bean
     public SpringResourceTemplateResolver templateResolver() {
         SpringResourceTemplateResolver templateResolver = new SpringResourceTemplateResolver();
@@ -32,7 +33,7 @@ public class WebConfig implements WebMvcConfigurer {
         templateResolver.setSuffix(".html");
         return templateResolver;
     }
-//  Engine Spring nastr
+    //  Engine Spring nastr
     @Bean
     public SpringTemplateEngine templateEngine() {
         SpringTemplateEngine templateEngine = new SpringTemplateEngine();
@@ -41,7 +42,7 @@ public class WebConfig implements WebMvcConfigurer {
         return templateEngine;
     }
 
-//  Thymeleaf nasrt = Spring + Shablon
+    //  Thymeleaf nasrt = Spring + Shablon
     @Override
     public void configureViewResolvers(ViewResolverRegistry registry) {
         ThymeleafViewResolver resolver = new ThymeleafViewResolver();

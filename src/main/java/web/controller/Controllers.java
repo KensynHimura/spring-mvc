@@ -1,20 +1,20 @@
+
 package web.controller;
 
-import jdk.nashorn.internal.runtime.regexp.joni.ast.StringNode;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import web.model.Car;
 import web.service.ServiceCarImp;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 @Controller
 public class Controllers {
-	ServiceCarImp carImp = new ServiceCarImp();
+
+	@Autowired
+	private ServiceCarImp carImp;
 
 	@GetMapping(value = "msg")
 	public String printWelcome(ModelMap model) {
@@ -26,9 +26,18 @@ public class Controllers {
 		return "index";
 	}
 
+//	@GetMapping(value = "cars")
+//	public String printCars(@RequestParam(value = "count", required = false, defaultValue = "5") int count, ModelMap modelCar) {
+//		modelCar.addAttribute("cars", carImp.getCars(count));
+//		return "mech";
+//	}
 	@GetMapping(value = "cars")
-	public String printCars(@RequestParam(value = "count", required = false, defaultValue = "5") int count, ModelMap modelCar) {
-		modelCar.addAttribute("cars", carImp.getCars(count));
-		return "cars";
+	public String printCars(@RequestParam(name = "count", required = false) Integer count, ModelMap modelMap) {
+		if (count != null) {
+			modelMap.addAttribute("cars", carImp.getCars(count));
+		} else {
+			modelMap.addAttribute("cars", carImp.allCars());
+		}
+		return "mech";
 	}
 }

@@ -1,0 +1,47 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Title</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div>-->
+<!--    <th:block th:each="car : ${cars}">-->
+<!--        <h2 th:text="${cars}"></h2>-->
+<!--    </th:block>-->
+<!--</div>-->
+
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cars</title>
+</head>
+<body>
+<div>
+    <table>
+        <thead>
+        <tr>
+            <th> Color </th>
+            <th> Hybrid </th>
+            <th> Wheels </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${cars.empty}">
+            <td colspan="3"> Has no Cars </td>
+        </tr>
+        <tr th:each="car : ${cars}">
+            <td><span th:text="${car.color}"> Color </span></td>
+            <td><span th:text="${car.engine}"> Hybrid </span></td>
+            <td><span th:text="${car.wheels}"> Wheels </span></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>
